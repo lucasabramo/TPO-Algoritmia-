@@ -49,11 +49,12 @@ def opciones_menu():
     print("5: Salir")
 
 def listado():
-    i=0
-    print("Idinterno","|","Codigo","|","Pais","|","Grupo","|","Partidos Jugados","|","GF","|","GC")
-    while i<len(selecciones):
-        print(idinterno[i],"|",codigos_seleccion[i],"|",selecciones[i],"|",grupo[i],"|",partidos_jugados[i],"|",goles_a_favor[i],"|",goles_en_contra[i])
-        i+=1
+    i = 0
+    print(f"{'Idinterno':<10} | {'Codigo':<7} | {'Pais':<20} | {'Grupo':<6} | {'Partidos Jugados':<17} | {'GF':<4} | {'GC':<4}")
+    print("-" * 85)
+    while i < len(selecciones):
+        print(f"{idinterno[i]:<10} | {codigos_seleccion[i]:<7} | {selecciones[i]:<20} | {grupo[i]:<6} | {partidos_jugados[i]:<17} | {goles_a_favor[i]:<4} | {goles_en_contra[i]:<4}")
+        i += 1
 #PROGRAMA PRINCIPAL
 def main():
     eleccion=0
@@ -70,4 +71,4 @@ def main():
             listado()
         else:
             pass
-main()
+main()()
