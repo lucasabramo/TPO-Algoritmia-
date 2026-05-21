@@ -34,19 +34,65 @@ IdInterno | Código | País | Grupo | Partidos Jugados | GF | GC'''
 idinterno=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 codigos_seleccion=[101,102,103,104,105,106,107,108,109,110,111,112,113,114,115]
 selecciones=["Uruguay","Argentina","Estados Unidos","Chile","Mexico","Brasil","Paraguay","Peru","Bolivia","Francia","Rumania","Belgica","Yugoslavia","España","Italia"]
-paises_mundial = [ "Uruguay", "Argentina", "Brasil", "Chile", "Paraguay", "Peru", "Bolivia", "Ecuador", "Colombia", "Venezuela",
-    # América del Norte y Central
-    "Mexico", "Estados Unidos", "Cuba", "Haiti", "El Salvador", "Honduras", "Costa Rica", "Canada", "Trinidad y Tobago", "Jamaica", "Panama",
-    # Europa
-    "Francia", "Alemania", "Italia", "España", "Inglaterra", "Portugal", "Holanda", "Belgica", "Suecia", "Suiza", "Dinamarca", "Noruega",
-    "Polonia", "Checoslovaquia", "Yugoslavia", "Rumania", "Hungria", "Austria", "Escocia", "Irlanda del Norte", "Irlanda", "Gales",
-    "Bulgaria", "Rusia", "Ucrania", "Croacia", "Serbia", "Eslovenia","Grecia", "Turquia", "Republica Checa", "Eslovaquia", "Bosnia Herzegovina", "Islandia", "Finlandia", "Letonia", "Albania", "Estonia",
-    # África
-    "Marruecos", "Argelia", "Tunez", "Egipto", "Nigeria", "Camerun","Sudafrica", "Senegal", "Ghana", "Costa de Marfil", "Angola","Togo", "Zaire", "Zambia", "Congo",
+paises_mundial =  [
+    # América del Sur
+    "Argentina", "Bolivia", "Brasil", "Chile", "Colombia", 
+    "Ecuador", "Paraguay", "Peru", "Uruguay", "Venezuela",
+
+    # América del Norte, Central y Caribe
+    "Antigua Y Barbuda", "Bahamas", "Barbados", "Belice", "Bermudas", 
+    "Canada", "Costa Rica", "Cuba", "Curazao", "Dominica", 
+    "El Salvador", "Estados Unidos", "Granada", "Guatemala", "Guyana", 
+    "Haiti", "Honduras", "Jamaica", "Mexico", "Nicaragua", 
+    "Panama", "Puerto Rico", "Republica Dominicana", "San Cristobal Y Nieves", 
+    "San Vicente Y Las Granadinas", "Santa Lucia", "Surinam", "Trinidad Y Tobago",
+    "Anguila", "Aruba", "Islas Caiman", "Islas Turcas Y Caicos", 
+    "Islas Virgenes Britanicas", "Islas Virgenes De Los Estados Unidos", "Montserrat",
+
+    # Europa 
+    "Albania", "Alemania", "Alemania Democratica", "Andorra", "Armenia", 
+    "Austria", "Azerbaiyan", "Belgica", "Bielorrusia", "Bosnia Herzegovina", 
+    "Bulgaria", "Checoslovaquia", "Chipre", "Ciudad Del Vaticano", "Croacia", 
+    "Dinamarca", "Escocia", "Eslovaquia", "Eslovenia", "España", "Estonia", 
+    "Finlandia", "Francia", "Gales", "Georgia", "Gibraltar", 
+    "Grecia", "Hungria", "Inglaterra", "Irlanda", "Irlanda Del Norte", 
+    "Islandia", "Islas Feroe", "Israel", "Italia", "Kazajistan", "Kosovo", 
+    "Letonia", "Liechtenstein", "Lituania", "Luxemburgo", "Macedonia Del Norte", 
+    "Malta", "Moldavia", "Monaco", "Montenegro", "Noruega", "Paises Bajos", 
+    "Polonia", "Portugal", "Reino Unido", "Republica Checa", "Rumania", "Rusia", 
+    "San Marino", "Serbia", "Suecia", "Suiza", "Turquia", "Ucrania", 
+    "Union Sovietica", "Yugoslavia",
+
+    # África 
+    "Angola", "Argelia", "Benin", "Botsuana", "Burkina Faso", 
+    "Burundi", "Cabo Verde", "Camerun", "Chad", "Comoras", 
+    "Congo", "Costa De Marfil", "Egipto", "Eritrea", "Esuatini", 
+    "Etiopia", "Gabon", "Gambia", "Ghana", "Guinea", 
+    "Guinea Ecuatorial", "Guinea-Bisau", "Kenia", "Lesoto", "Liberia", 
+    "Libia", "Madagascar", "Malaui", "Mali", "Marruecos", 
+    "Mauricio", "Mauritania", "Mozambique", "Namibia", "Niger", 
+    "Nigeria", "Republica Centroafricana", "Republica Democratica Del Congo", 
+    "Ruanda", "Santo Tome Y Principe", "Senegal", "Seychelles", "Sierra Leona", 
+    "Somalia", "Sudafrica", "Sudan", "Sudan Del Sur", "Tanzania", "Togo", 
+    "Tunez", "Uganda", "Yibuti", "Zaire", "Zambia", "Zimbabue",
+
     # Asia
-    "Corea del Sur", "Japon", "Arabia Saudita", "Iran", "Irak", "Kuwait","China", "Indonesia",
-    # Oceanía
-    "Australia", "Nueva Zelanda",]
+    "Afganistan", "Arabia Saudita", "Australia", "Bahrein", "Bangladesh", 
+    "Birmania", "Brunei", "Butan", "Camboya", "China", "Corea Del Norte", 
+    "Corea Del Sur", "Emiratos Arabes Unidos", "Filipinas", "Guam", "Hong Kong", 
+    "India", "Indonesia", "Irak", "Iran", "Japon", 
+    "Jordania", "Kirguistan", "Kuwait", "Laos", "Libano", 
+    "Macao", "Malasia", "Maldivas", "Mongolia", "Nepal", 
+    "Oman", "Pakistan", "Palestina", "Qatar", "Singapur", 
+    "Siria", "Sri Lanka", "Tailandia", "Taiwan", "Tayikistan", "Timor Oriental", 
+    "Turkmenistan", "Uzbekistan", "Vietnam", "Yemen",
+
+    # Oceanía 
+    "Fiyi", "Islas Cook", "Islas Marshall", "Islas Salomon", "Kiribati", 
+    "Micronesia", "Nauru", "Nueva Caledonia", "Nueva Zelanda", "Palaos", 
+    "Papua Nueva Guinea", "Samoa", "Samoa Americana", "Tahiti", "Tonga", 
+    "Tuvalu", "Vanuatu"
+]
 grupo=["C","A","D","A","A","B","D","C","B","A","C","D","B","H","H"]
 partidos_jugados=[4,5,3,3,3,2,2,2,2,3,2,2,3,0,0]
 goles_a_favor=[15,18,7,5,4,5,1,1,0,4,3,0,7,0,0]
