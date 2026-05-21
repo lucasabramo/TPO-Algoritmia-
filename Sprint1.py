@@ -162,9 +162,107 @@ def main():
         if eleccion==1:
              alta_seleccion()
         elif eleccion==2:
-            pass
+            print("\n-- MODIFICACION DE SELECCION --")
+            codigo_buscar = int(input("Ingrese el codigo de la seleccion que desea modificar: ")) 
+            #Buscamos en que posicion de la lista se encuentra el codigo ingresado
+            posicion= -1
+            i=0
+            while i < len(codigos_seleccion):
+                if codigos_seleccion[i] == codigo_buscar:
+                    posicion = i
+                i += 1
+                #Si el codigo no se encuentra, se muestra un mensaje de error
+                if posicion == -1:
+                    print("Codigo no encontrado.")
+                else: 
+                   print(f"Modificando el equipo: {selecciones[posicion]}")
+                #Modificamos unicamente el nombre del pais
+                nuevo_pais= input("Nuevo nombre de la seleccion(pais):")
+                es_pais_valido = False
+                esta_repetido = False
+                #  Comprobamos si el nuevo país existe en paises_mundial 
+                r= 0 
+                while r < len(paises_mundial):
+                    if paises_mundial[r] == nuevo_pais:
+                        es_pais_valido = True
+                    r += 1
+                #  Comprobamos si el nuevo país ya esta registrado en selecciones
+                r= 0 
+                while r < len(selecciones):
+                    if selecciones[r] == nuevo_pais and r != posicion:
+                        esta_repetido = True
+                    r += 1
+                #si no es un pais valido o ya esta registrado, se muestra un mensaje de error
+                while es_pais_valido == false or esta_repetido == true:
+                    print("Nombre inválido o ya anotado en otra selección. Debe ser un país válido.")
+                    nuevo_pais= input("Nuevo nombre de la seleccion(pais):")
+                    # Volvemos a chequear los datos ingresados
+                    es_pais_valido = False
+                    esta_repetido = False
+                    
+                    r= 0
+                    while r < len(paises_mundial):
+                        if paises_mundial[r] == nuevo_pais:
+                            es_pais_valido = True
+                        r += 1
+                    r= 0
+                    while r < len(selecciones):
+                        if selecciones[r] == nuevo_pais and r != posicion:
+                            esta_repetido = True
+                        r += 1
+                    # Cuando pasa el filtro, guardamos el cambio
+                    selecciones[posicion] = nuevo_pais
+                    print("Nombre de la seleccion modificado correctamente.")
         elif eleccion==3:
-            pass
+            print("\n--BAJA DE SELECCION--")
+            codigo_buscar = int(input("Ingrese el codigo de la seleccion que desea eliminar: "))
+
+            #Buscamos en que posicion de la lista se encuentra el codigo ingresado
+            posicion =-1
+            i=0
+            while i < len(codigos_seleccion):
+                if codigos_seleccion[i] == codigo_buscar:
+                    posicion = i
+                i += 1
+            #validamos si se puede borrar
+            if posicion == -1:
+                print("El codigo ingresado no existe")
+            else:
+                #si ya jugo partidos(mayo a 0); No se borra
+                if partidos_jugados[posicion] > 0:
+                    print("No se puede eliminar la seleccion porque ya posee partidos jugados.")
+                else:
+                    #Si tiene 0 partidos, lo borramos de todas las listas
+                    #Listas vacias temporales
+                    nuevo_id = []
+                    nuevo_codigo = []
+                    nuevo_pais = []
+                    nuevo_grupo = []
+                    nuevo_partidos = []
+                    nuevo_gf = []
+                    nuevo_gc = []
+                r = 0
+                nuevo_id_contador = 1 #contador para asignar nuevos idinternos de forma consecutiva
+                while r < len(codigos_seleccion):
+                    if r != posicion: #si no es la posicion a eliminar, se agrega a las nuevas listas
+                        nuevo_id.append(nuevo_id_contador)
+                        nuevo_codigo.append(codigos_seleccion[r])
+                        nuevo_pais.append(selecciones[r])
+                        nuevo_grupo.append(grupo[r])
+                        nuevo_partidos.append(partidos_jugados[r])
+                        nuevo_gf.append(goles_a_favor[r])
+                        nuevo_gc.append(goles_en_contra[r])
+                        nuevo_id_contador += 1
+                    r += 1
+                #Reemplazamos las listas originales por las nuevas listas sin la seleccion eliminada
+                idinterno = nuevo_id
+                codigos_seleccion = nuevo_codigo
+                selecciones = nuevo_pais
+                grupo = nuevo_grupo
+                partidos_jugados = nuevo_partidos
+                goles_a_favor = nuevo_gf
+                goles_en_contra = nuevo_gc
+                print("Seleccion eliminada correctamente.")
         elif eleccion==4:
             listado()
         else:
