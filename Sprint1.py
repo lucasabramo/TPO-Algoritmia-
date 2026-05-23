@@ -153,7 +153,7 @@ def alta_seleccion():
 #FUNCION MODIFICACION DE SELECCION
 def modificacion_seleccion():
     print("\n-- MODIFICACION DE SELECCION --")
-    codigo_buscar = int(input("Ingrese el codigo de la seleccion que desea modificar: ")) 
+    codigo_buscar = int(input("Ingrese el codigo de la seleccion que desea modificar: "))
     #Buscamos en que posicion de la lista se encuentra el codigo ingresado
     posicion= -1
     i=0
@@ -167,7 +167,7 @@ def modificacion_seleccion():
     else: 
         print(f"Modificando el equipo: {selecciones[posicion]}")
         #Modificamos unicamente el nombre del pais
-        nuevo_pais= input("Nuevo nombre de la seleccion(pais):")
+        nuevo_pais= input("Nuevo nombre de la seleccion(pais):".upper()).strip().title() 
         es_pais_valido = False
         esta_repetido = False
         #  Comprobamos si el nuevo país existe en paises_mundial 
@@ -185,7 +185,7 @@ def modificacion_seleccion():
         #si no es un pais valido o ya esta registrado, se muestra un mensaje de error
         while es_pais_valido == False or esta_repetido == True:
             print("Nombre inválido o ya anotado en otra selección. Debe ser un país válido.")
-            nuevo_pais= input("Nuevo nombre de la seleccion(pais):")
+            nuevo_pais= input("Nuevo nombre de la seleccion(pais):").upper().strip().title()
             # Volvemos a chequear los datos ingresados
             es_pais_valido = False
             esta_repetido = False
@@ -281,7 +281,6 @@ def main():
         opciones_menu()
         eleccion=int(input("Seleccion una opcion: "))
         print("-" * 20)
-        print("")
         if eleccion==1:
              alta_seleccion()
         elif eleccion==2:
