@@ -246,14 +246,31 @@ def baja_seleccion():
                     nuevo_gc.append(goles_en_contra[r])
                     nuevo_id_contador += 1
                 r += 1
+
+            # Vaciamos las listas originales de afuera usando un while
             #Reemplazamos las listas originales por las nuevas listas sin la seleccion eliminada
-            idinterno = nuevo_id
-            codigos_seleccion = nuevo_codigo
-            selecciones = nuevo_pais
-            grupo = nuevo_grupo
-            partidos_jugados = nuevo_partidos
-            goles_a_favor = nuevo_gf
-            goles_en_contra = nuevo_gc
+            # Borramos el primer elemento hasta que queden vacías
+            while len(codigos_seleccion) > 0:
+                codigos_seleccion[:] = []
+                selecciones[:] = []
+                grupo[:] = []
+                partidos_jugados[:] = []
+                goles_a_favor[:] = []
+                goles_en_contra[:] = []
+                idinterno[:] = []  
+
+            # Volvemos a pasar los datos guardados a las listas originales usando .append()
+            # De esta forma modificamos las variables originales directamente
+            k = 0
+            while k < len(nuevo_codigo):
+                idinterno.append(nuevo_id[k])
+                codigos_seleccion.append(nuevo_codigo[k])
+                selecciones.append(nuevo_pais[k])
+                grupo.append(nuevo_grupo[k])
+                partidos_jugados.append(nuevo_partidos[k])
+                goles_a_favor.append(nuevo_gf[k])
+                goles_en_contra.append(nuevo_gc[k])
+                k += 1
             print("Seleccion eliminada correctamente.")
     
 #PROGRAMA PRINCIPAL
@@ -275,4 +292,4 @@ def main():
             listado()
         else:
             print("Adios, gracias")
-main()
+main() 
