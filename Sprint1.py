@@ -85,6 +85,7 @@ goles_en_contra=[3,9,8,3,13,3,4,4,8,5,5,5,7,0,0]
 
 #FUNCIONES
 #MUESTRA OPCIONES DEL MENU
+#Autor: Lucas Abramo
 def opciones_menu():
     print("1: Alta de seleccion")
     print("2: Modificacion de seleccion")
@@ -93,6 +94,7 @@ def opciones_menu():
     print("5: Salir")
 
 # FUNCION LISTADO 
+# Autor: Lucas Abramo
 def listado():
     i = 0
     print(f"{'Idinterno':<10} | {'Codigo':<7} | {'Pais':<20} | {'Grupo':<6} | {'Partidos Jugados':<17} | {'GF':<4} | {'GC':<4}")
@@ -103,6 +105,7 @@ def listado():
     print("-" * 85)
     
 #FUNCION ALTA DE SELECCION
+# Autor: Gael Terrado 
 def alta_seleccion():
     print ("\n --ALTA DE SELECCION--")
     #--CODIGO DE LA SELECCION--
@@ -151,9 +154,10 @@ def alta_seleccion():
     goles_en_contra.append(gc)
 
 #FUNCION MODIFICACION DE SELECCION
+# Autor: Thiago Santervas
 def modificacion_seleccion():
     print("\n-- MODIFICACION DE SELECCION --")
-    codigo_buscar = int(input("Ingrese el codigo de la seleccion que desea modificar: ")) 
+    codigo_buscar = int(input("Ingrese el codigo de la seleccion que desea modificar: "))
     #Buscamos en que posicion de la lista se encuentra el codigo ingresado
     posicion= -1
     i=0
@@ -167,7 +171,7 @@ def modificacion_seleccion():
     else: 
         print(f"Modificando el equipo: {selecciones[posicion]}")
         #Modificamos unicamente el nombre del pais
-        nuevo_pais= input("Nuevo nombre de la seleccion(pais):")
+        nuevo_pais= input("Nuevo nombre de la seleccion(pais):".upper()).strip().title() 
         es_pais_valido = False
         esta_repetido = False
         #  Comprobamos si el nuevo país existe en paises_mundial 
@@ -185,7 +189,7 @@ def modificacion_seleccion():
         #si no es un pais valido o ya esta registrado, se muestra un mensaje de error
         while es_pais_valido == False or esta_repetido == True:
             print("Nombre inválido o ya anotado en otra selección. Debe ser un país válido.")
-            nuevo_pais= input("Nuevo nombre de la seleccion(pais):")
+            nuevo_pais= input("Nuevo nombre de la seleccion(pais):").upper().strip().title()
             # Volvemos a chequear los datos ingresados
             es_pais_valido = False
             esta_repetido = False
@@ -205,6 +209,7 @@ def modificacion_seleccion():
         print("Nombre de la seleccion modificado correctamente.")
 
 #FUNCION BAJA DE SELECCION
+# Autor: Thiago Santervas
 def baja_seleccion():
     print("\n--BAJA DE SELECCION--")
     codigo_buscar = int(input("Ingrese el codigo de la seleccion que desea eliminar: "))
@@ -274,6 +279,7 @@ def baja_seleccion():
             print("Seleccion eliminada correctamente.")
     
 #PROGRAMA PRINCIPAL
+# Autor: Lucas Abramo
 def main():
     eleccion=0
     while eleccion!=5:
@@ -281,7 +287,6 @@ def main():
         opciones_menu()
         eleccion=int(input("Seleccion una opcion: "))
         print("-" * 20)
-        print("")
         if eleccion==1:
              alta_seleccion()
         elif eleccion==2:
