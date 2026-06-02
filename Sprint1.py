@@ -91,8 +91,8 @@ def opciones_menu():
     print("2: Modificacion de seleccion")
     print("3: Baja de seleccion")
     print("4: Listado general")
-    print("5: Salir")
-
+    print("5: Busqueda por codigo")
+    print("6: Salir")
 # FUNCION LISTADO 
 # Autor: Lucas Abramo
 def listado():
@@ -277,12 +277,30 @@ def baja_seleccion():
                 goles_en_contra.append(nuevo_gc[k])
                 k += 1
             print("Seleccion eliminada correctamente.")
-    
+
+# FUNCION BUSQUEDA POR CODIGO
+# Autor: Lucas Abramo   
+def busqueda_por_codigo():
+    print("\n--BUSQUEDA POR CODIGO--")
+    busqueda=int(input("Ingrese un codigo para buscar el pais: "))
+    posicion=-1
+    i=0
+    while i<len(codigos_seleccion):
+        if codigos_seleccion[i]==busqueda:
+            posicion=i
+        i+=1
+    if posicion==-1: 
+        print("El pais no fue encontrado")
+    else: 
+        print("La seleccion fue encontrada")    
+        print(f"{'Idinterno':<10} | {'Codigo':<7} | {'Pais':<22} | {'Grupo':<6} | {'Partidos Jugados':<20} | {'GF':<4} | {'GC':<4}")
+        print(f"{idinterno[posicion]:<10} | {codigos_seleccion[posicion]:<7} | {selecciones[posicion]:<22} | {grupo[posicion]:<6} | {partidos_jugados[posicion]:<20} | {goles_a_favor[posicion]:<4} | {goles_en_contra[posicion]:<4}")
+
 #PROGRAMA PRINCIPAL
 # Autor: Lucas Abramo
 def main():
     eleccion=0
-    while eleccion!=5:
+    while eleccion!=6:
         print("\n--MENU DE OPCIONES--")
         opciones_menu()
         eleccion=int(input("Seleccion una opcion: "))
@@ -295,6 +313,8 @@ def main():
             baja_seleccion()
         elif eleccion==4:
             listado()
+        elif eleccion==5:
+            busqueda_por_codigo()
         else:
             print("Adios, gracias")
 main() 
