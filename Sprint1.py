@@ -100,11 +100,11 @@ def opciones_menu():
 def listado():
     i = 0
     print(f"{'Idinterno':<10} | {'Codigo':<7} | {'Pais':<20} | {'Grupo':<6} | {'Partidos Jugados':<17} | {'GF':<4} | {'GC':<4}")
-    print("-" * 85)
+    print("-" * 87)
     while i < len(selecciones):
         print(f"{idinterno[i]:<10} | {codigos_seleccion[i]:<7} | {selecciones[i]:<20} | {grupo[i]:<6} | {partidos_jugados[i]:<17} | {goles_a_favor[i]:<4} | {goles_en_contra[i]:<4}")
         i += 1
-    print("-" * 85)
+    print("-" * 87)
     
 #FUNCION ALTA DE SELECCION
 # Autor: Gael Terrado 
@@ -173,7 +173,7 @@ def modificacion_seleccion():
     else: 
         print(f"Modificando el equipo: {selecciones[posicion]}")
         #Modificamos unicamente el nombre del pais
-        nuevo_pais= input("Nuevo nombre de la seleccion(pais):".upper()).strip().title() 
+        nuevo_pais= input("Nuevo nombre de la seleccion(pais): ").upper().strip().title() 
         es_pais_valido = False
         esta_repetido = False
         #  Comprobamos si el nuevo país existe en paises_mundial 
@@ -191,7 +191,7 @@ def modificacion_seleccion():
         #si no es un pais valido o ya esta registrado, se muestra un mensaje de error
         while es_pais_valido == False or esta_repetido == True:
             print("Nombre inválido o ya anotado en otra selección. Debe ser un país válido.")
-            nuevo_pais= input("Nuevo nombre de la seleccion(pais):").upper().strip().title()
+            nuevo_pais= input("Nuevo nombre de la seleccion(pais): ").upper().strip().title()
             # Volvemos a chequear los datos ingresados
             es_pais_valido = False
             esta_repetido = False
