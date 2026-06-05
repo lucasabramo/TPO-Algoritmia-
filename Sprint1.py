@@ -345,17 +345,17 @@ def reporte_filtrado_grupo():
     print("\n-- REPORTE FILTRADO POR GRUPO --")
     
     # 1. Pedimos el grupo avisando que sea en mayúscula
-    grupo_buscar = input("Ingrese la letra del grupo a consultar (A-H en MAYUSCULA): ")
+    grupo_buscar = input("Ingrese la letra del grupo a consultar: ").upper()
     
     # Validamos que sea un grupo válido (De la A a la H)
     while grupo_buscar != "A" and grupo_buscar != "B" and grupo_buscar != "C" and grupo_buscar != "D" and grupo_buscar != "E" and grupo_buscar != "F" and grupo_buscar != "G" and grupo_buscar != "H":
-        print("Grupo inválido. Debe ser una sola letra entre A y H en mayúscula.")
-        grupo_buscar = input("Ingrese la letra del grupo a consultar (A-H en MAYUSCULA): ")
+        print("Grupo inválido. Debe ser una sola letra entre A y H.")
+        grupo_buscar = input("Ingrese la letra del grupo a consultar: ").upper()
         
     print("\nSELECCIONES ENCONTRADAS:")
-    print("-" * 85)
-    print("Idinterno  | Codigo  | Pais                 | Grupo  | Partidos Jugados  | GF   | GC")
-    print("-" * 85)
+    print("-" * 87)
+    print(f"{'Idinterno':<10} | {'Codigo':<7} | {'Pais':<22} | {'Grupo':<6} | {'Partidos Jugados':<20} | {'GF':<4} | {'GC':<4}")
+    print("-" * 87)
     
     # 2. Mostrar únicamente las selecciones de ese grupo
     i = 0
@@ -363,7 +363,7 @@ def reporte_filtrado_grupo():
     
     while i < len(grupo):
         if grupo[i] == grupo_buscar:
-            print(idinterno[i], "       |", codigos_seleccion[i], "   |", selecciones[i], "           |", grupo[i], "     |", partidos_jugados[i], "              |", goles_a_favor[i], "  |", goles_en_contra[i])
+            print(f"{idinterno[i]:<10} | {codigos_seleccion[i]:<7} | {selecciones[i]:<22} | {grupo[i]:<6} | {partidos_jugados[i]:<20} | {goles_a_favor[i]:<4} | {goles_en_contra[i]:<4}")
             cantidad_encontrados = cantidad_encontrados + 1
         i = i + 1
         
@@ -371,7 +371,7 @@ def reporte_filtrado_grupo():
     if cantidad_encontrados == 0:
         print("No se encontraron selecciones registradas para el grupo seleccionado.")
         
-    print("-" * 85)
+    print("-" * 87)
 
 #PROGRAMA PRINCIPAL
 # Autor: Lucas Abramo
