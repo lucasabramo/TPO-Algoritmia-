@@ -91,11 +91,7 @@ def opciones_menu():
     print("2: Modificacion de seleccion")
     print("3: Baja de seleccion")
     print("4: Listado general")
-    print("5: Busqueda por codigo")
-    print("6: Orden por goles a favor")
-    print("7: Orden por goles en contra")
-    print("8: Reporte filtrado por grupo")
-    print("9: Salir")
+    print("5: Salir")
 # FUNCION LISTADO 
 # Autor: Lucas Abramo
 def listado():
@@ -308,151 +304,17 @@ def baja_seleccion():
                 k += 1
             print("Seleccion eliminada correctamente.")
 
-# FUNCION BUSQUEDA POR CODIGO
-# Autor: Lucas Abramo   
-def busqueda_por_codigo():
-    print("\n--BUSQUEDA POR CODIGO--")
-    busqueda=int(input("Ingrese un codigo para buscar el pais: "))
-    posicion=-1
-    i=0
-    while i<len(codigos_seleccion):
-        if codigos_seleccion[i]==busqueda:
-            posicion=i
-        i+=1
-    if posicion==-1: 
-        print("El pais no fue encontrado")
-    else: 
-        print("La seleccion fue encontrada")   
-        print ("-" * 87) 
-        print(f"{'Idinterno':<10} | {'Codigo':<7} | {'Pais':<22} | {'Grupo':<6} | {'Partidos Jugados':<20} | {'GF':<4} | {'GC':<4}")
-        print(f"{idinterno[posicion]:<10} | {codigos_seleccion[posicion]:<7} | {selecciones[posicion]:<22} | {grupo[posicion]:<6} | {partidos_jugados[posicion]:<20} | {goles_a_favor[posicion]:<4} | {goles_en_contra[posicion]:<4}")
-        print ("-" * 87)
-
-
-#funcion orden por goles a favor (metodo burbuja)
-#Autor: Gael Terrrado
-def orden_goles_a_favor():
-    print ("\n--ORDEN POR GOLES A FAVOR--")
-    for i in range (0, len(goles_a_favor)-1):
-        for j in range (i + 1, len(goles_a_favor)):
-            if goles_a_favor[j] > goles_a_favor[i]:
-                aux = goles_a_favor[j]
-                goles_a_favor[j] = goles_a_favor[i]
-                goles_a_favor[i] = aux
-                #ordenamos las otras listas para que no se pierda la relacion entre los datos
-                aux = idinterno[i]
-                idinterno[i] = idinterno[j]
-                idinterno[j] = aux
-                
-                aux = codigos_seleccion[i]
-                codigos_seleccion[i] = codigos_seleccion[j]
-                codigos_seleccion[j] = aux
-
-                aux = selecciones[i]
-                selecciones[i] = selecciones[j]
-                selecciones[j] = aux
-
-                aux = grupo[i]
-                grupo[i] = grupo[j]
-                grupo[j] = aux
-
-                aux = partidos_jugados[i]
-                partidos_jugados[i] = partidos_jugados[j]
-                partidos_jugados[j] = aux
-
-                aux = goles_en_contra[i]
-                goles_en_contra[i] = goles_en_contra[j]
-                goles_en_contra[j] = aux
-    print("Listado ordenado por goles a favor:")
-    listado()
-
-#Funcion orden por goles en contra (metodo seleccion)
-#Autor: Gael Terrado
-def orden_goles_en_contra():
-    print ("\n--ORDEN POR GOLES EN CONTRA--")
-    for i in range (0, len(goles_en_contra)-1):
-        posicion_menor = i
-        for j in range (i + 1, len(goles_en_contra)):
-            if goles_en_contra[j] > goles_en_contra[posicion_menor]:
-                posicion_menor = j
-        #intercambiamos el menor con el primer elemento del subarreglo
-        aux = goles_en_contra[i]
-        goles_en_contra[i] = goles_en_contra[posicion_menor]
-        goles_en_contra[posicion_menor] = aux
-        #ordenamos las otras listas para que no se pierda la relacion entre los datos
-        aux = idinterno[i]
-        idinterno[i] = idinterno[posicion_menor]
-        idinterno[posicion_menor] = aux
-
-        aux = codigos_seleccion[i]
-        codigos_seleccion[i] = codigos_seleccion[posicion_menor]
-        codigos_seleccion[posicion_menor] = aux
-
-        aux = selecciones[i]
-        selecciones[i] = selecciones[posicion_menor]    
-        selecciones[posicion_menor] = aux
-
-        aux = grupo[i]
-        grupo[i] = grupo[posicion_menor]
-        grupo[posicion_menor] = aux
-
-        aux = partidos_jugados[i]
-        partidos_jugados[i] = partidos_jugados[posicion_menor]
-        partidos_jugados[posicion_menor] = aux
-
-        aux = goles_a_favor[i]
-        goles_a_favor[i] = goles_a_favor[posicion_menor]
-        goles_a_favor[posicion_menor] = aux
-    print("Listado ordenado por goles en contra:")
-    listado()
-
-# Funcion reporte filtrado por grupo 
-# Autor: Thiago Santervas
-def reporte_filtrado_grupo():
-    print("\n-- REPORTE FILTRADO POR GRUPO --")
-    
-    # 1. Pedimos el grupo avisando que sea en mayúscula
-    grupo_buscar = input("Ingrese la letra del grupo a consultar: ").upper()
-    
-    # Validamos que sea un grupo válido (De la A a la H)
-    while grupo_buscar != "A" and grupo_buscar != "B" and grupo_buscar != "C" and grupo_buscar != "D" and grupo_buscar != "E" and grupo_buscar != "F" and grupo_buscar != "G" and grupo_buscar != "H":
-        print("Grupo inválido. Debe ser una sola letra entre A y H.")
-        grupo_buscar = input("Ingrese la letra del grupo a consultar: ").upper()
-         
-    print("\nSELECCIONES ENCONTRADAS:")
-    print("-" * 87)
-    print(f"{'Idinterno':<10} | {'Codigo':<7} | {'Pais':<22} | {'Grupo':<6} | {'Partidos Jugados':<20} | {'GF':<4} | {'GC':<4}")
-    print("-" * 87)
-    
-    # 2. Mostrar únicamente las selecciones de ese grupo
-    i = 0
-    cantidad_encontrados = 0 
-    
-    while i < len(grupo):
-        if grupo[i] == grupo_buscar:
-            print(f"{idinterno[i]:<10} | {codigos_seleccion[i]:<7} | {selecciones[i]:<22} | {grupo[i]:<6} | {partidos_jugados[i]:<20} | {goles_a_favor[i]:<4} | {goles_en_contra[i]:<4}")
-            cantidad_encontrados = cantidad_encontrados + 1
-        i = i + 1
-
-        
-    # 3. Informar si no se encontraron selecciones en ese grupo
-    if cantidad_encontrados == 0:
-        print("No se encontraron selecciones registradas para el grupo seleccionado.")
-    
-    print (cantidad_encontrados, "selecciones encontradas en el grupo", grupo_buscar)
-    print("-" * 87)
-
 #PROGRAMA PRINCIPAL
 # Autor: Lucas Abramo
 def main():
     eleccion=0
-    while eleccion!=9:
+    while eleccion!=5:
         print("\n--MENU DE OPCIONES--")
         opciones_menu()
         eleccion=int(input("Seleccion una opcion: "))
         print("-" * 20)
         if eleccion==1:
-             alta_seleccion()
+            alta_seleccion()
         elif eleccion==2:
             modificacion_seleccion()
         elif eleccion==3:
@@ -460,13 +322,7 @@ def main():
         elif eleccion==4:
             listado()
         elif eleccion==5:
-            busqueda_por_codigo()
-        elif eleccion==6:
-            orden_goles_a_favor()
-        elif eleccion==7:
-            orden_goles_en_contra()
-        elif eleccion==8:
-            reporte_filtrado_grupo()
-        else:
             print("Adios, gracias")
+        else:
+            print("Opcion invalida")
 main() 
