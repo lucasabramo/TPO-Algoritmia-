@@ -467,6 +467,8 @@ def main():
             orden_goles_en_contra()
         elif eleccion==8:
             reporte_filtrado_grupo()
-        else:
+        elif eleccion==9:
             print("Adios, gracias")
+        else:
+            print("Opcion invalida")
 main() 
