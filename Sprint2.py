@@ -95,7 +95,8 @@ def opciones_menu():
     print("6: Orden por goles a favor")
     print("7: Orden por goles en contra")
     print("8: Reporte filtrado por grupo")
-    print("9: Salir")
+    print("9: Reporte por partidos jugados")
+    print("10: Salir")
 # FUNCION LISTADO 
 # Autor: Lucas Abramo
 def listado():
@@ -442,11 +443,35 @@ def reporte_filtrado_grupo():
     print (cantidad_encontrados, "selecciones encontradas en el grupo", grupo_buscar)
     print("-" * 87)
 
+# Funcion reporte de selecciones con mas de una cantidad de partidos jugados
+# Autor: Lucas Abramo
+def reporte_por_partidos_jugados():
+    pedir= int(input("Ingrese una cantidad de partidos jugados: "))
+    while pedir<0:
+        print("Cantidad de partidos jugados invalida. No puede ser un numero negativo.")
+        pedir= int(input("Ingrese una cantidad de partidos jugados: "))
+    print("\nSELECCIONES ENCONTRADAS:")
+    print("-" * 87) 
+    print(f"{'Idinterno':<10} | {'Codigo':<7} | {'Pais':<22} | {'Grupo':<6} | {'Partidos Jugados':<20} | {'GF':<4} | {'GC':<4}")
+    print("-" * 87)
+    i=0
+    cantidad_encontrados=0
+    while i<len(partidos_jugados):
+        if partidos_jugados[i]>pedir:
+            print(f"{idinterno[i]:<10} | {codigos_seleccion[i]:<7} | {selecciones[i]:<22} | {grupo[i]:<6} | {partidos_jugados[i]:<20} | {goles_a_favor[i]:<4} | {goles_en_contra[i]:<4}")
+            cantidad_encontrados=cantidad_encontrados+1
+        i=i+1
+    if cantidad_encontrados==0:
+        print("No se encontraron selecciones con mas de", pedir, "partidos jugados.")
+    print(cantidad_encontrados, "selecciones encontradas con mas de", pedir, "partidos jugados.")
+    print("-" * 87)     
+
+
 #PROGRAMA PRINCIPAL
 # Autor: Lucas Abramo
 def main():
     eleccion=0
-    while eleccion!=9:
+    while eleccion!=10:
         print("\n--MENU DE OPCIONES--")
         opciones_menu()
         eleccion=int(input("Seleccion una opcion: "))
@@ -468,6 +493,8 @@ def main():
         elif eleccion==8:
             reporte_filtrado_grupo()
         elif eleccion==9:
+            reporte_por_partidos_jugados()
+        elif eleccion==10:
             print("Adios, gracias")
         else:
             print("Opcion invalida")
