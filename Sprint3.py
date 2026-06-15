@@ -389,7 +389,7 @@ def reporte_filtrado_grupo(idinterno, codigos_seleccion, selecciones, grupo, par
     print (cantidad_encontrados, "selecciones encontradas en el grupo", grupo_buscar)
     print("-" * 87)
 
-# Funcion reporte de selecciones con mas de una cantidad de partidos jugados
+# FUNCION REPORTE DE SELECCIONES CON MAS DE UNA CANTIDAD DE PARTIDOS JUGADOS
 # Autor: Lucas Abramo
 def reporte_por_partidos_jugados(idinterno, codigos_seleccion, selecciones, grupo, partidos_jugados, goles_a_favor, goles_en_contra):
     pedir= int(input("Ingrese una cantidad de partidos jugados: "))
