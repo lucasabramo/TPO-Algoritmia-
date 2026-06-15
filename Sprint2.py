@@ -79,8 +79,7 @@ def opciones_menu():
     print("7: Orden por goles en contra")
     print("8: Reporte filtrado por grupo")
     print("9: Reporte por partidos jugados")
-    print("10: Reporte matricial grupo x rendimiento ofensivo")
-    print("11: Salir")
+    print("10: Salir")
 
 # FUNCION LISTADO 
 # Autor: Lucas Abramo
@@ -412,57 +411,12 @@ def reporte_por_partidos_jugados(idinterno, codigos_seleccion, selecciones, grup
     print(cantidad_encontrados, "selecciones encontradas con mas de", pedir, "partidos jugados.")
     print("-" * 87)     
 
-# FUNCION PRIMER REPORTE MATRICIAL 
-# Autor: Lucas Abramo
-def reporte_matricial(grupo, goles_a_favor):
-    print("\n-- REPORTE MATRICIAL GRUPO x RENDIMIENTO OFENSIVO --")
-
-    # Crear la matriz de 8 filas por 3 columnas llena de ceros
-    filas = 8
-    columnas = 3
-    matriz = []
-    f = 0
-    while f < filas:
-        matriz.append([])
-        c = 0
-        while c < columnas:
-            matriz[f].append(0)
-            c += 1
-        f += 1
-
-    # Recorro las selecciones y completo la matriz
-    grupos = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-    i = 0
-    while i < len(grupo):
-        fila = buscar_en_lista(grupos, grupo[i])
-        if goles_a_favor[i] <= 3:
-            columna = 0
-        elif goles_a_favor[i] <= 8:
-            columna = 1
-        else:
-            columna = 2
-        matriz[fila][columna] += 1
-        i += 1
-
-    # Imprimo la matriz visualmente
-    print(f"{'Grupo':<8} {'Bajo':<8} {'Medio':<8} {'Alto':<8}")
-    print("-" * 35)
-    f = 0
-    while f < len(matriz):
-        print(f"Grupo {grupos[f]:<8}", end=" ")
-        c = 0
-        while c < len(matriz[f]):
-            print(f"{matriz[f][c]:<8}", end=" ")
-            c += 1
-        print()
-        f += 1
-
 #PROGRAMA PRINCIPAL
 # Autor: Lucas Abramo
 def main():
     idinterno, codigos_seleccion, selecciones, paises_mundial, grupo, partidos_jugados, goles_a_favor, goles_en_contra= inicializar_datos()
     eleccion=0
-    while eleccion!=11:
+    while eleccion!=10:
         print("\n--MENU DE OPCIONES--")
         opciones_menu()
         eleccion=int(input("Seleccion una opcion: "))
@@ -486,8 +440,6 @@ def main():
         elif eleccion==9:
             reporte_por_partidos_jugados(idinterno, codigos_seleccion, selecciones, grupo, partidos_jugados, goles_a_favor, goles_en_contra)
         elif eleccion==10:
-            reporte_matricial(grupo, goles_a_favor)
-        elif eleccion==11:
             print("Adios, gracias")
         else:
             print("Opcion invalida")
