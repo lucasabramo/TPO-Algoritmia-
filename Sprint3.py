@@ -421,19 +421,14 @@ def reporte_matricial(grupo, goles_a_favor):
     filas = 8
     columnas = 3
     matriz = []
-    f = 0
-    while f < filas:
+    for f in range(filas):
         matriz.append([])
-        c = 0
-        while c < columnas:
+        for c in range(columnas):
             matriz[f].append(0)
-            c += 1
-        f += 1
 
     # Recorro las selecciones y completo la matriz
     grupos = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-    i = 0
-    while i < len(grupo):
+    for i in range(len(grupo)):
         fila = buscar_en_lista(grupos, grupo[i])
         if goles_a_favor[i] <= 3:
             columna = 0
@@ -442,20 +437,21 @@ def reporte_matricial(grupo, goles_a_favor):
         else:
             columna = 2
         matriz[fila][columna] += 1
-        i += 1
 
     # Imprimo la matriz visualmente
-    print(f"{'Grupo':<8} {'Bajo':<8} {'Medio':<8} {'Alto':<8}")
-    print("-" * 35)
-    f = 0
-    while f < len(matriz):
-        print(f"Grupo {grupos[f]:<8}", end=" ")
-        c = 0
-        while c < len(matriz[f]):
-            print(f"{matriz[f][c]:<8}", end=" ")
-            c += 1
+    filas = len(matriz)
+    columnas = len(matriz[0])
+    nombre = "Grupo"
+    bajo = "Bajo"
+    medio = "Medio"
+    alto = "Alto"
+    print(f"{nombre:<10}{bajo:>5}{medio:>7}{alto:>6}")
+    print("-" * 30)
+    for f in range(filas):
+        print("Grupo", grupos[f], end="    ")
+        for c in range(columnas):
+            print("%3d" % matriz[f][c], end="  ")
         print()
-        f += 1
 
 #PROGRAMA PRINCIPAL
 # Autor: Lucas Abramo
