@@ -81,7 +81,8 @@ def opciones_menu():
     print("9: Reporte por partidos jugados")
     print("10: Reporte matricial grupo x rendimiento ofensivo")
     print("11: Reporte estadistico general")
-    print("12: Salir")
+    print("12: Reporte filtrado por grupo y partidos jugados")
+    print("13: Salir")
 
 # FUNCION LISTADO 
 # Autor: Lucas Abramo
@@ -566,13 +567,50 @@ def reporte_indicadores_estadisticos(idinterno, codigos_seleccion, selecciones, 
     print(f"\nGrupo con mayor cantidad de selecciones: Grupo {grupo_mayor} ({mayor_cantidad_grupos} selecciones)")
     print(f"\nCantidad de selecciones que no disputaron partidos: {selecciones_sin_partidos}")
     print("-" * 70)
-          
+
+#Funcion Reporte 3: Reporte filtrado por GRUPO y PARTIDOS JUGADOS    
+#Autos: Thiago Santervas
+def reporte_grupo_partidosjugados(idinterno, codigos_seleccion, selecciones, grupo, partidos_jugados, goles_a_favor, goles_en_contra): 
+    print("\n-- REPORTE FILTRADO POR GRUPO Y PARTIDOS JUGADOS --")
+    #Pedimos y validamos el grupo (Debe ser entre A y H) 
+    grupo_buscar = input("Ingrese la letra del grupo a consultar (a-h): ").upper().strip()
+    while buscar_en_lista(['A','B','C','D','E','F','G','H'], grupo_buscar) == -1:
+        print("Grupo invalido. Debe ser una sola letra entre A y H.")
+        grupo_buscar = input("Ingrese la letra del grupo a consultar (A-H): ").upper().strip()
+        
+    #Pedimos y validamos los partidos jugados (No puede ser negativo) 
+    partidos_limite = int(input("Ingrese la cantidad minima de partidos jugados: "))
+    while partidos_limite < 0:
+        print("Cantidad invalida. No puede ser un numero negativo")
+        partidos_limite = int(input("Ingrese la cantidad minima de partidos jugados: "))
+    print("\nSELECCIONES ENCONTRADAS:")
+    print("-" * 87)
+    print(f"{'Idinterno':<10} | {'Codigo':<7} | {'Pais':<22} | {'Grupo':<6} | {'Partidos Jugados':<20} | {'GF':<4} | {'GC':<4}")
+    print("-" * 87)
+
+    #Recorremos las listas y mostramos las selecciones que cumplen con ambos criterios
+    i = 0 
+    cantidad_encontrados = 0
+    while i < len(grupo):
+        if grupo[i] == grupo_buscar and partidos_jugados[i] >= partidos_limite:
+            print(f"{idinterno[i]:<10} | {codigos_seleccion[i]:<7} | {selecciones[i]:<22} | {grupo[i]:<6} | {partidos_jugados[i]:<20} | {goles_a_favor[i]:<4} | {goles_en_contra[i]:<4}")
+            cantidad_encontrados +=1
+        i += 1
+    
+    #Mostramos la cantidad de selecciones encontradas o un mensaje si no se encontraron
+    if cantidad_encontrados == 0: 
+        print(f"No se encontraron selecciones en el grupo {grupo_buscar} con {partidos_limite} partidos jugados.")
+    else: 
+        print(f"{cantidad_encontrados} selecciones encontradas en el grupo {grupo_buscar} con al menos {partidos_limite} partidos jugados.")
+    print("-" * 87)
+
+
 #PROGRAMA PRINCIPAL
 # Autor: Lucas Abramo
 def main():
     idinterno, codigos_seleccion, selecciones, paises_mundial, grupo, partidos_jugados, goles_a_favor, goles_en_contra= inicializar_datos()
     eleccion=0
-    while eleccion!=12:
+    while eleccion!=13:
         print("\n--MENU DE OPCIONES--")
         opciones_menu()
         eleccion=int(input("Seleccion una opcion: "))
@@ -600,6 +638,8 @@ def main():
         elif eleccion==11:
             reporte_indicadores_estadisticos(idinterno, codigos_seleccion, selecciones, grupo, partidos_jugados, goles_a_favor, goles_en_contra)
         elif eleccion==12:
+            reporte_grupo_partidosjugados(idinterno, codigos_seleccion, selecciones, grupo, partidos_jugados, goles_a_favor, goles_en_contra)
+        elif eleccion==13:
             print("Adios, gracias")
         else:
             print("Opcion invalida")
