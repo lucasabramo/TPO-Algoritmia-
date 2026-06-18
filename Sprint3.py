@@ -80,7 +80,8 @@ def opciones_menu():
     print("8: Reporte filtrado por grupo")
     print("9: Reporte por partidos jugados")
     print("10: Reporte matricial grupo x rendimiento ofensivo")
-    print("11: Salir")
+    print("11: Reporte estadistico general")
+    print("12: Salir")
 
 # FUNCION LISTADO 
 # Autor: Lucas Abramo
@@ -385,9 +386,14 @@ def reporte_filtrado_grupo(idinterno, codigos_seleccion, selecciones, grupo, par
     # 3. Informar si no se encontraron selecciones en ese grupo
     if cantidad_encontrados == 0:
         print("No se encontraron selecciones registradas para el grupo seleccionado.")
-    
-    print (cantidad_encontrados, "selecciones encontradas en el grupo", grupo_buscar)
+   
+   # 4. Informar la cantidad de selecciones encontradas en ese grupo
+    if cantidad_encontrados == 1:
+        print("\n1 seleccion encontrada en el grupo", grupo_buscar)
+    else:
+        print ("\n",cantidad_encontrados, "selecciones encontradas en el grupo", grupo_buscar)
     print("-" * 87)
+
 
 # FUNCION REPORTE DE SELECCIONES CON MAS DE UNA CANTIDAD DE PARTIDOS JUGADOS
 # Autor: Lucas Abramo
@@ -409,7 +415,10 @@ def reporte_por_partidos_jugados(idinterno, codigos_seleccion, selecciones, grup
         i=i+1
     if cantidad_encontrados==0:
         print("No se encontraron selecciones con mas de", pedir, "partidos jugados.")
-    print(cantidad_encontrados, "selecciones encontradas con mas de", pedir, "partidos jugados.")
+    elif cantidad_encontrados==1:
+        print(" \n1 seleccion encontrada con mas de", pedir, "partidos jugados.")
+    else:
+        print("\n",cantidad_encontrados, "selecciones encontradas con mas de", pedir, "partidos jugados.")
     print("-" * 87)     
 
 # FUNCION PRIMER REPORTE MATRICIAL 
@@ -452,13 +461,118 @@ def reporte_matricial(grupo, goles_a_favor):
         for c in range(columnas):
             print("%3d" % matriz[f][c], end="  ")
         print()
+        f += 1
+    print("-" * 35)
 
+
+# FUNCION REPORTE INDICADORES ESTADISTICOS GENERALES
+# Autor: Gael Terrado
+def reporte_indicadores_estadisticos(idinterno, codigos_seleccion, selecciones, grupo, partidos_jugados, goles_a_favor, goles_en_contra):
+    
+    # Validar si hay selecciones registradas
+    if len(selecciones) == 0:
+        print("No hay selecciones registradas. No se puede generar el reporte.")
+        print("-" * 70)
+        return
+    
+    # cantidad total de selecciones registradas
+    cantidad_total = 0
+    i = 0
+    while i < len(selecciones):
+        cantidad_total += 1
+        i += 1
+    
+    # total goles a favor y goles en contra 
+    total_goles_favor = 0
+    total_goles_contra = 0
+    i = 0
+    while i < len(goles_a_favor):
+        total_goles_favor += goles_a_favor[i]
+        total_goles_contra += goles_en_contra[i]
+        i += 1
+    
+    # promedio de goles a favor por seleccion
+    promedio_goles_favor = total_goles_favor / cantidad_total
+    
+    # selección con mayor cantidad de goles a favor
+    mayor_goles_favor = goles_a_favor[0]
+    posicion_mayor_gf = 0
+    i = 0
+    while i < len(goles_a_favor):
+        if goles_a_favor[i] > mayor_goles_favor:
+            mayor_goles_favor = goles_a_favor[i]
+            posicion_mayor_gf = i
+        i += 1
+    
+    seleccion_mayor_gf = selecciones[posicion_mayor_gf]
+    
+    # Selección con menor cantidad de goles en contra
+    menor_goles_contra = goles_en_contra[0]
+    posicion_menor_gc = 0
+    i = 0
+    while i < len(goles_en_contra):
+        if goles_en_contra[i] < menor_goles_contra:
+            menor_goles_contra = goles_en_contra[i]
+            posicion_menor_gc = i
+        i += 1
+    
+    seleccion_menor_gc = selecciones[posicion_menor_gc]
+    
+    # Grupo con mayor cantidad de selecciones
+    # Crear contadores para cada grupo (A-H)
+    grupos_lista = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    contadores_grupos = [0, 0, 0, 0, 0, 0, 0, 0]  # Corresponde a A, B, C, D, E, F, G, H
+    
+    # Contar selecciones por grupo
+    i = 0
+    while i < len(grupo):
+        # Buscar en qué posición está el grupo en la lista de grupos
+        j = 0
+        while j < len(grupos_lista):
+            if grupos_lista[j] == grupo[i]:
+                contadores_grupos[j] += 1
+                break
+            j += 1
+        i += 1
+    
+    # Encontrar el grupo con más selecciones
+    mayor_cantidad_grupos = contadores_grupos[0]
+    posicion_grupo_mayor = 0
+    i = 0
+    while i < len(contadores_grupos):
+        if contadores_grupos[i] > mayor_cantidad_grupos:
+            mayor_cantidad_grupos = contadores_grupos[i]
+            posicion_grupo_mayor = i
+        i += 1
+    
+    grupo_mayor = grupos_lista[posicion_grupo_mayor]
+    
+    # Selecciones sin partidos disputados
+    selecciones_sin_partidos = 0
+    i = 0
+    while i < len(partidos_jugados):
+        if partidos_jugados[i] == 0:
+            selecciones_sin_partidos += 1
+        i += 1
+    
+    # imprimir el reporte con los indicadores calculados
+    print("\n" + "-" * 27 + "Reporte General" + "-" * 27)
+    print(f"\nCantidad total de selecciones registradas: {cantidad_total}")
+    print(f"\nTotal de goles a favor: {total_goles_favor}")
+    print(f"Total de goles en contra: {total_goles_contra}")
+    print(f"\nPromedio de goles a favor por selección: {promedio_goles_favor:.2f}")
+    print(f"\nSelección con mayor cantidad de goles a favor: \n {seleccion_mayor_gf} ({mayor_goles_favor} goles)")
+    print(f"Selección con menor cantidad de goles en contra: \n {seleccion_menor_gc} ({menor_goles_contra} goles)")
+    print(f"\nGrupo con mayor cantidad de selecciones: Grupo {grupo_mayor} ({mayor_cantidad_grupos} selecciones)")
+    print(f"\nCantidad de selecciones que no disputaron partidos: {selecciones_sin_partidos}")
+    print("-" * 70)
+          
 #PROGRAMA PRINCIPAL
 # Autor: Lucas Abramo
 def main():
     idinterno, codigos_seleccion, selecciones, paises_mundial, grupo, partidos_jugados, goles_a_favor, goles_en_contra= inicializar_datos()
     eleccion=0
-    while eleccion!=11:
+    while eleccion!=12:
         print("\n--MENU DE OPCIONES--")
         opciones_menu()
         eleccion=int(input("Seleccion una opcion: "))
@@ -484,7 +598,9 @@ def main():
         elif eleccion==10:
             reporte_matricial(grupo, goles_a_favor)
         elif eleccion==11:
+            reporte_indicadores_estadisticos(idinterno, codigos_seleccion, selecciones, grupo, partidos_jugados, goles_a_favor, goles_en_contra)
+        elif eleccion==12:
             print("Adios, gracias")
         else:
             print("Opcion invalida")
-main() 
+main()
