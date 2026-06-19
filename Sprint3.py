@@ -210,7 +210,7 @@ def baja_seleccion(idinterno, codigos_seleccion, selecciones, grupo, partidos_ju
     if posicion == -1:
         print("El codigo ingresado no existe")
     else:
-        #si ya jugo partidos(mayo a 0); No se borra
+        #si ya jugo partidos(mayor a 0); No se borra
         if partidos_jugados[posicion] > 0:
             print("No se puede eliminar la seleccion porque ya posee partidos jugados.")
         else:
@@ -360,7 +360,7 @@ def orden_goles_en_contra(idinterno, codigos_seleccion, selecciones, grupo, part
 def reporte_filtrado_grupo(idinterno, codigos_seleccion, selecciones, grupo, partidos_jugados, goles_a_favor, goles_en_contra):
     print("\n-- REPORTE FILTRADO POR GRUPO --")
     
-    # 1. Pedimos el grupo avisando que sea en mayúscula
+    # 1. Pedimos el grupo a buscar
     grupo_buscar = input("Ingrese la letra del grupo a consultar: ").upper()
     
     # Validamos que sea un grupo válido (De la A a la H)
@@ -462,7 +462,6 @@ def reporte_matricial(grupo, goles_a_favor):
         for c in range(columnas):
             print("%3d" % matriz[f][c], end="  ")
         print()
-        f += 1
     print("-" * 35)
 
 
@@ -529,10 +528,11 @@ def reporte_indicadores_estadisticos(idinterno, codigos_seleccion, selecciones, 
     while i < len(grupo):
         # Buscar en qué posición está el grupo en la lista de grupos
         j = 0
-        while j < len(grupos_lista):
+        encontrado = False
+        while j < len(grupos_lista) and encontrado == False:
             if grupos_lista[j] == grupo[i]:
                 contadores_grupos[j] += 1
-                break
+                encontrado = True
             j += 1
         i += 1
     
@@ -583,17 +583,18 @@ def reporte_grupo_partidosjugados(idinterno, codigos_seleccion, selecciones, gru
     while partidos_limite < 0:
         print("Cantidad invalida. No puede ser un numero negativo")
         partidos_limite = int(input("Ingrese la cantidad minima de partidos jugados: "))
-    print("\nSELECCIONES ENCONTRADAS:")
-    print("-" * 87)
-    print(f"{'Idinterno':<10} | {'Codigo':<7} | {'Pais':<22} | {'Grupo':<6} | {'Partidos Jugados':<20} | {'GF':<4} | {'GC':<4}")
-    print("-" * 87)
+    print("\nGrupo seleccionado:", grupo_buscar)
+    print("Partidos jugados minimos:", partidos_limite)
+    print("-" * 75)
+    print(f"{'Codigo':<10} | {'Pais':<22} | {'Grupo':<6} | {'PJ':<5} | {'GF':<4} | {'GC':<4}")
+    print("-" * 75)
 
     #Recorremos las listas y mostramos las selecciones que cumplen con ambos criterios
     i = 0 
     cantidad_encontrados = 0
     while i < len(grupo):
         if grupo[i] == grupo_buscar and partidos_jugados[i] >= partidos_limite:
-            print(f"{idinterno[i]:<10} | {codigos_seleccion[i]:<7} | {selecciones[i]:<22} | {grupo[i]:<6} | {partidos_jugados[i]:<20} | {goles_a_favor[i]:<4} | {goles_en_contra[i]:<4}")
+            print(f"{codigos_seleccion[i]:<10} | {selecciones[i]:<22} | {grupo[i]:<6} | {partidos_jugados[i]:<5} | {goles_a_favor[i]:<4} | {goles_en_contra[i]:<4}")
             cantidad_encontrados +=1
         i += 1
     
@@ -601,8 +602,10 @@ def reporte_grupo_partidosjugados(idinterno, codigos_seleccion, selecciones, gru
     if cantidad_encontrados == 0: 
         print(f"No se encontraron selecciones en el grupo {grupo_buscar} con {partidos_limite} partidos jugados.")
     else: 
-        print(f"{cantidad_encontrados} selecciones encontradas en el grupo {grupo_buscar} con al menos {partidos_limite} partidos jugados.")
-    print("-" * 87)
+        print("-" * 75)
+        print()
+        print(f"Total encontrados: {cantidad_encontrados}")
+    
 
 
 #PROGRAMA PRINCIPAL
